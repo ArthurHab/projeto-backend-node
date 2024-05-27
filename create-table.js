@@ -1,6 +1,6 @@
 import { sql } from './db.js'
 
-// sql`DROP TABLE IF EXISTS videos;`.then(() => {
+// sql`DROP TABLE IF EXISTS questoes;`.then(() => {
 //   console.log('Tabela apagada!')
 // })
 
@@ -22,7 +22,8 @@ import { sql } from './db.js'
 //     banca        TEXT,
 //     orgao        TEXT,
 //     prova        TEXT,
-//     ano          SMALLINT
+//     ano          SMALLINT,
+//     tipo         CHAR
 //   );
 // `.then(() => {
 //     console.log('Tabela criada!')
@@ -46,159 +47,169 @@ import { sql } from './db.js'
 //     2024
 // )
 
-// sql`
-// INSERT INTO questoes (questao, banca, orgao, prova, ano) VALUES
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem1_1.jpeg", "http://urlimagem1_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 1", "segundo texto exemplo 1"],
-//         "enunciado": "Enunciado da questão 1",
-//         "alternativas": [
-//             "Texto da alternativa A1",
-//             "Texto da alternativa B1",
-//             "Texto da alternativa C1",
-//             "Texto da alternativa D1",
-//             "Texto da alternativa E1"
-//         ]
-//     }',
-//     'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem2_1.jpeg", "http://urlimagem2_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 2", "segundo texto exemplo 2"],
-//         "enunciado": "Enunciado da questão 2",
-//         "alternativas": [
-//             "Texto da alternativa A2",
-//             "Texto da alternativa B2",
-//             "Texto da alternativa C2",
-//             "Texto da alternativa D2",
-//             "Texto da alternativa E2"
-//         ]
-//     }',
-//     'Banca_CESPE', 'Orgao_Anatel', 'Prova_Anatel', 2022
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem3_1.jpeg", "http://urlimagem3_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 3", "segundo texto exemplo 3"],
-//         "enunciado": "Enunciado da questão 3",
-//         "alternativas": [
-//             "Texto da alternativa A3",
-//             "Texto da alternativa B3",
-//             "Texto da alternativa C3",
-//             "Texto da alternativa D3",
-//             "Texto da alternativa E3"
-//         ]
-//     }',
-//     'Banca_ESAF', 'Orgao_MF', 'Prova_Auditor_Fiscal', 2023
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem4_1.jpeg", "http://urlimagem4_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 4", "segundo texto exemplo 4"],
-//         "enunciado": "Enunciado da questão 4",
-//         "alternativas": [
-//             "Texto da alternativa A4",
-//             "Texto da alternativa B4",
-//             "Texto da alternativa C4",
-//             "Texto da alternativa D4",
-//             "Texto da alternativa E4"
-//         ]
-//     }',
-//     'Banca_VUNESP', 'Orgao_Policia_Civil', 'Prova_Investigador', 2024
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem5_1.jpeg", "http://urlimagem5_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 5", "segundo texto exemplo 5"],
-//         "enunciado": "Enunciado da questão 5",
-//         "alternativas": [
-//             "Texto da alternativa A5",
-//             "Texto da alternativa B5",
-//             "Texto da alternativa C5",
-//             "Texto da alternativa D5",
-//             "Texto da alternativa E5"
-//         ]
-//     }',
-//     'Banca_UNESP', 'Orgao_SEDUC', 'Prova_Professor', 2025
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem6_1.jpeg", "http://urlimagem6_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 6", "segundo texto exemplo 6"],
-//         "enunciado": "Enunciado da questão 6",
-//         "alternativas": [
-//             "Texto da alternativa A6",
-//             "Texto da alternativa B6",
-//             "Texto da alternativa C6",
-//             "Texto da alternativa D6",
-//             "Texto da alternativa E6"
-//         ]
-//     }',
-//     'Banca_CESGRANRIO', 'Orgao_Petrobras', 'Prova_Engenheiro', 2020
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem7_1.jpeg", "http://urlimagem7_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 7", "segundo texto exemplo 7"],
-//         "enunciado": "Enunciado da questão 7",
-//         "alternativas": [
-//             "Texto da alternativa A7",
-//             "Texto da alternativa B7",
-//             "Texto da alternativa C7",
-//             "Texto da alternativa D7",
-//             "Texto da alternativa E7"
-//         ]
-//     }',
-//     'Banca_FCC', 'Orgao_TJ', 'Prova_Tecnico_Judiciario', 2019
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem8_1.jpeg", "http://urlimagem8_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 8", "segundo texto exemplo 8"],
-//         "enunciado": "Enunciado da questão 8",
-//         "alternativas": [
-//             "Texto da alternativa A8",
-//             "Texto da alternativa B8",
-//             "Texto da alternativa C8",
-//             "Texto da alternativa D8",
-//             "Texto da alternativa E8"
-//         ]
-//     }',
-//     'Banca_CESPE', 'Orgao_INSS', 'Prova_Analista', 2018
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem9_1.jpeg", "http://urlimagem9_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 9", "segundo texto exemplo 9"],
-//         "enunciado": "Enunciado da questão 9",
-//         "alternativas": [
-//             "Texto da alternativa A9",
-//             "Texto da alternativa B9",
-//             "Texto da alternativa C9",
-//             "Texto da alternativa D9",
-//             "Texto da alternativa E9"
-//         ]
-//     }',
-//     'Banca_FGV', 'Orgao_BB', 'Prova_Escriturario', 2021
-// ),
-// (
-//     '{
-//         "imagensUrl": ["http://urlimagem10_1.jpeg", "http://urlimagem10_2.jpeg"],
-//         "textos": ["primeiro texto exemplo 10", "segundo texto exemplo 10"],
-//         "enunciado": "Enunciado da questão 10",
-//         "alternativas": [
-//             "Texto da alternativa A10",
-//             "Texto da alternativa B10",
-//             "Texto da alternativa C10",
-//             "Texto da alternativa D10",
-//             "Texto da alternativa E10"
-//         ]
-//     }',
-//     'Banca_Consulplan', 'Orgao_TCU', 'Prova_Auditor', 2022
-// );
 
+
+
+// sql`INSERT INTO questoes (questao, banca, orgao, prova, ano, tipo)
+// VALUES 
+// ('{
+//     "primeiroEnunciado": "Qual é a capital do Brasil?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Belo Horizonte",
+//         "Salvador",
+//         "Rio de Janeiro",
+//         "Brasília",
+//         "São Paulo"
+//     ],
+//     "indexAlternativaCorreta": "3"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é a montanha mais alta do Brasil?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Pico da Neblina",
+//         "Pico Paraná",
+//         "Pico da Bandeira",
+//         "Pico do Jaraguá",
+//         "Morro da Igreja"
+//     ],
+//     "indexAlternativaCorreta": "0"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é o menor estado do Brasil em extensão territorial?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Sergipe",
+//         "Alagoas",
+//         "Rio de Janeiro",
+//         "Espírito Santo",
+//         "Distrito Federal"
+//     ],
+//     "indexAlternativaCorreta": "0"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual o rio mais extenso do Brasil?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Rio São Francisco",
+//         "Rio Amazonas",
+//         "Rio Paraná",
+//         "Rio Madeira",
+//         "Rio Tocantins"
+//     ],
+//     "indexAlternativaCorreta": "1"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é o bioma predominante na Região Norte do Brasil?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Cerrado",
+//         "Mata Atlântica",
+//         "Pantanal",
+//         "Caatinga",
+//         "Amazônia"
+//     ],
+//     "indexAlternativaCorreta": "4"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual cidade é conhecida como a Veneza Brasileira?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Recife",
+//         "Belém",
+//         "Manaus",
+//         "Rio de Janeiro",
+//         "São Luís"
+//     ],
+//     "indexAlternativaCorreta": "0"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é a maior região do Brasil em termos de área?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Norte",
+//         "Nordeste",
+//         "Centro-Oeste",
+//         "Sudeste",
+//         "Sul"
+//     ],
+//     "indexAlternativaCorreta": "0"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Em que ano o Brasil foi descoberto pelos portugueses?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "1500",
+//         "1492",
+//         "1530",
+//         "1600",
+//         "1580"
+//     ],
+//     "indexAlternativaCorreta": "0"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é o estado brasileiro com a maior população?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Minas Gerais",
+//         "Bahia",
+//         "São Paulo",
+//         "Rio de Janeiro",
+//         "Pernambuco"
+//     ],
+//     "indexAlternativaCorreta": "2"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Qual é a unidade monetária do Brasil?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Peso",
+//         "Dólar",
+//         "Real",
+//         "Euro",
+//         "Cruzado"
+//     ],
+//     "indexAlternativaCorreta": "2"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M'),
+// ('{
+//     "primeiroEnunciado": "Brasil é o maior país do mundo?",
+//     "imagens": [""],
+//     "segundoEnunciado": "",
+//     "alternativas": [
+//         "Certo",
+//         "Errado"
+//     ],
+//     "indexAlternativaCorreta": "1"
+// }', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'M')
 // `.then(() => {
 //     console.log('dados inseridos com sucesso!')
 // })
+
+
+
+sql`INSERT INTO questoes (questao, banca, orgao, prova, ano, tipo)
+VALUES 
+('{
+    "primeiroEnunciado": "Paraíba é o estado mais populoso do Brasil?",
+    "imagens": [""],
+    "segundoEnunciado": "",
+    "alternativas": [
+        "Certo",
+        "Errado"
+    ],
+    "indexAlternativaCorreta": "1"
+}', 'Banca_FGV', 'Orgao_MEC', 'Prova_Enem', 2021, 'C')`.then(() => {
+    console.log('dados inseridos com sucesso!')
+})
+
