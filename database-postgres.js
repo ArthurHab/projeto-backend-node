@@ -5,7 +5,7 @@ export class DatabasePostgres {
     async list(page){
         let questoes
 
-        if (search){
+        if (page){
             // questoes = await sql`select * from questoes where title ilike ${'%' +search+ '%'}`
             questoes = sql`select * from questoes limit 10 offset ${page*10}`
         } else {
