@@ -9,7 +9,7 @@ export class DatabasePostgres {
             // questoes = await sql`select * from questoes where title ilike ${'%' +search+ '%'}`
             questoes = sql`select * from questoes limit 10 offset ${page*10}`
         } else {
-            questoes = await sql`select * from questoes`
+            questoes = await sql`select * from questoes limit 10 offset 0`
         }
 
         return questoes
