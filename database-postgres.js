@@ -2,12 +2,12 @@ import { sql } from './db.js'
 
 export class DatabasePostgres {
 
-    async list(search){
+    async list(page){
         let questoes
 
         if (search){
             // questoes = await sql`select * from questoes where title ilike ${'%' +search+ '%'}`
-            questoes = sql`select * from questoes`
+            questoes = sql`select * from questoes limit 10 offset ${page*10}`
         } else {
             questoes = await sql`select * from questoes`
         }

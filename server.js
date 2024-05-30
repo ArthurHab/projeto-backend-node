@@ -7,9 +7,10 @@ const database = new DatabasePostgres()
 
 server.get('/questoes', async (request) => {
     
-    const search = request.query.search
+    // const search = request.query.search
+    const page = request.query.page
 
-    const questoes = await database.list(search)
+    const questoes = await database.list(page)
 
     return questoes
 })
