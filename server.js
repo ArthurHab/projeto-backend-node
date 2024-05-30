@@ -5,10 +5,6 @@ const server = fastify()
 
 const database = new DatabasePostgres()
 
-var cors = require('cors')
-
-server.use(cors())
-
 server.get('/questoes', async (request) => {
     
     const search = request.query.search
