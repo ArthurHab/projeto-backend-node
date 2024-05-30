@@ -5,7 +5,7 @@ const server = fastify()
 
 const database = new DatabasePostgres()
 
-server.get('/api/questoes', async (request) => {
+server.get('/questoes', async (request) => {
     
     const search = request.query.search
 
